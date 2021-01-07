@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from flask_api.status import HTTP_400_BAD_REQUEST
 
 api = Blueprint('api', __name__)
 
@@ -11,5 +12,6 @@ def hello_world():
 @api.route('/decision', methods=['POST'])
 def decision_request():
     observations = request.form.getlist('obs')
-    if observations is None:
-        return {'error': 'No Observation sent.'}
+    if observations is None or len(observations) == 0:
+        return {'error': 'No Observation sent.'}, HTTP_400_BAD_REQUEST
+    return {'action': '1'}
