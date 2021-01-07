@@ -1,0 +1,33 @@
+name: Pylint
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  pylint:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ubuntu-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ubuntu-pip-
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install -r requirements.txt
+
+    - name: Python Pylint Github Action
+      run: |
+        python3 -m pylint --version
+        python3 -m pylint --load-plugins=pylint_flask --rcfile=pylintrc brain_server tests
+         
