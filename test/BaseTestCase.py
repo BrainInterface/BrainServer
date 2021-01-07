@@ -11,6 +11,9 @@ class BaseTestCase(TestCase):
     Basic Test Case that setups the flask app.
     """
     def create_app(self):
+        """
+        Creates a test app.
+        """
         instance_path = os.path.join(os.path.dirname(__file__), 'instance')
 
         app = brain_server.create_app({
