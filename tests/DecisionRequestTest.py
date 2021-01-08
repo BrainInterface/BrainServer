@@ -1,6 +1,6 @@
 from unittest.mock import patch, Mock
 
-from test.BaseTestCase import BaseTestCase
+from tests.BaseTestCase import BaseTestCase
 
 from flask_api.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
 
