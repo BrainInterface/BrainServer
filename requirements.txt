@@ -1,3 +1,7 @@
 pip~=20.3.3
+SetupTools~=51.1.1
+Flask~=1.1.2
+Flask-API~=2.0.0
+flask-testing~=0.6.0
 pylint~=2.6
 pylint-flask~=0.6
