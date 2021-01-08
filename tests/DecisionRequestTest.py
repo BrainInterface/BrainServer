@@ -6,6 +6,9 @@ from flask_api.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
 
 
 class DecisionTest(BaseTestCase):
+    """
+    Tests the process of requesting a decision via sending observations.
+    """
     def test_obs_required(self):
         """
         Tests if an error is returned if no observation are sent.
