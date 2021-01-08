@@ -21,7 +21,7 @@ class DecisionTest(BaseTestCase):
     @patch('services.action_service.ActionService.request_actions', Mock(return_value=1))
     def test_action_is_request(self):
         """
-        Test action are returned.
+        Test request ID is returned.
         """
         with self.client:
             data = dict(obs={'color': 1})
