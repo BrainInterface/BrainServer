@@ -23,7 +23,6 @@ class DecisionTest(BaseTestCase):
         """
         Test action are returned.
         """
-
         with self.client:
             data = dict(obs={'color': 1})
             response = self.client.post('/decision', data=data)
