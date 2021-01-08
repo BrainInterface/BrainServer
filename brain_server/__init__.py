@@ -21,6 +21,7 @@ def create_app(test_config: dict[str, Any] = None, instance_path: str = None) ->
     except OSError:
         pass
 
+    # pylint: disable=import-outside-toplevel
     from brain_server.api import api
     app.register_blueprint(api)
 
