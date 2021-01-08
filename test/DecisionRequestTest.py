@@ -1,8 +1,8 @@
 from unittest.mock import patch, Mock
 
-from flask_api.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
-
 from test.BaseTestCase import BaseTestCase
+
+from flask_api.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
 
 
 class DecisionTest(BaseTestCase):
