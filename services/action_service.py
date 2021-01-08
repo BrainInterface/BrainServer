@@ -1,9 +1,12 @@
-from typing import Any, List
+from typing import Any, List, Union
 
 
 class ActionService:
-    def __init__(self, obs: list) -> None:
-        self._obs = obs
 
-    def get_actions(self) -> List[Any]:
+    @classmethod
+    def get_actions(cls, request_id: int) -> Union[float, List[Any]]:
+        pass
+
+    @classmethod
+    def request_actions(cls, observations: List[Any]) -> int:
         pass
