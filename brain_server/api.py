@@ -7,8 +7,8 @@ api = Blueprint('api', __name__)
 
 
 @api.route('/')
-def hello_world():
-    return 'Hello World!'
+def index():
+    return {'status': 'Server up'}
 
 
 @api.route('/decision', methods=['GET', 'POST'])
