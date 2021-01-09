@@ -14,5 +14,4 @@ class IndexTest(BaseTestCase):
         """
         with self.client:
             response = self.client.get('/')
-            self.assertEqual(status.HTTP_200_OK, response.status)
-            self.assertEqual({status: 'Server up'}, response.json)
+            self.assertEqual({'status': 'Server up'}, response.json)
