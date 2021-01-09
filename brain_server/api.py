@@ -23,9 +23,8 @@ def decision_request():
             return {'error': 'No Observation sent.'}, status.HTTP_400_BAD_REQUEST
         request_id = ActionService.request_actions(observations)
         return {'request': request_id}, status.HTTP_200_OK
-    elif request.method == 'GET':
-        request_id = request.form.get('request')
-        if request_id is None:
-            return {'error': 'No request ID was sent.'}, status.HTTP_400_BAD_REQUEST
-        return {'action': ActionService.get_actions(request_id)}, status.HTTP_200_OK
+    request_id = request.form.get('request')
+    if request_id is None:
+        return {'error': 'No request ID was sent.'}, status.HTTP_400_BAD_REQUEST
+    return {'action': ActionService.get_actions(request_id)}, status.HTTP_200_OK
 
