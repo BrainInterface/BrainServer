@@ -1,6 +1,7 @@
 from typing import Any, List, Union
 
 
+# pylint: disable=unsubscriptable-object
 class ActionService:
 
     @classmethod
