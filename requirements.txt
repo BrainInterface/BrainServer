@@ -1,5 +1,6 @@
 pip~=20.3.3
 SetupTools~=51.1.1
+Celery~=5.0.5
 Flask~=1.1.2
 Flask-API~=2.0.0
 Flask-Testing~=0.8.1
