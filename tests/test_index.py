@@ -1,5 +1,3 @@
-from flask_api import status
-
 from tests.BaseTestCase import BaseTestCase
 
 
