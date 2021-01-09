@@ -18,6 +18,14 @@ class DecisionTest(BaseTestCase):
             response = self.client.post('/decision', data=[])
             self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
+    def test_request_id_required(self):
+        """
+        Tests if an error is sent if there is no request id in the request.
+        """
+        with self.client:
+            response = self.client.get('/decision', data=[])
+            self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+
     @patch('services.action_service.ActionService.request_actions', Mock(return_value=1))
     def test_action_is_request(self):
         """
