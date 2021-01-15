@@ -1,9 +1,11 @@
 import os
-import torch
 from typing import Any, Optional, Union
 
+import torch
 
-def load_model(path: str, model_type: Optional[str], ModelClass: Optional[Any]) -> Any:
+
+def load_model(path: str, model_type: Optional[str] = None,
+               ModelClass: Optional[Any] = None) -> Any:
     """
     Loads a tensorflow or pytorch model.
     :param path: Path to model.
@@ -25,7 +27,9 @@ def load_model(path: str, model_type: Optional[str], ModelClass: Optional[Any]) 
         raise ValueError(f'model_type must be "pytorch" or "keras", but was {model_type}')
 
 
-def save_model(path: str, model: Union[torch.nn.Module, Any], model_type: Optional[str]) -> None:
+def save_model(path: str,
+               model: Union[torch.nn.Module, Any],
+               model_type: Optional[str] = None) -> None:
     """
     Saves the model.
     :param path: Path to the save location.
