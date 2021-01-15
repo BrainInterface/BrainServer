@@ -22,10 +22,9 @@ def load_model(path: str, model_type: Optional[str] = None,
         checkpoint = torch.load(path)
         model.load_state_dict(checkpoint)
         return model
-    elif model_type == 'keras':
+    if model_type == 'keras':
         raise ImportError('Currently tensorflow is not supported for python 3.9.')
-    else:
-        raise ValueError(f'model_type must be "pytorch" or "keras", but was {model_type}')
+    raise ValueError(f'model_type must be "pytorch" or "keras", but was {model_type}')
 
 
 def save_model(path: str,
@@ -52,7 +51,6 @@ def _guess_model_type(path):
     _, extension = os.path.splitext(path)
     if extension == ('.pt' or '.pth'):
         return 'pytorch'
-    elif extension == ('.h5' or '.keras'):
+    if extension == ('.h5' or '.keras'):
         return 'keras'
-    else:
-        raise IOError('Could not guess the model type.')
+    raise IOError('Could not guess the model type.')
