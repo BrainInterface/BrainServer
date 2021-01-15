@@ -17,10 +17,12 @@ class ModelServiceTest(BaseTestCase):
     """
     Tests the model service.
     """
+
     def setUp(self) -> None:
         self.path = 'data/test_model.pt'
         if os.path.exists(self.path):
             os.remove(self.path)
+        self.model = TestModel()
 
     def tearDown(self) -> None:
         if os.path.exists(self.path):
@@ -30,16 +32,15 @@ class ModelServiceTest(BaseTestCase):
         """
         Tests if a saved model is loaded corrected.
         """
-        model = TestModel()
-        torch.save(model.state_dict(), self.path)
+        torch.save(self.model.state_dict(), self.path)
         test_model = load_model(self.path, model_type='pytorch', ModelClass=TestModel)
-        self.assertIsNotNone(model, test_model)
+        self.assertIsNotNone(self.model, test_model)
 
     def test_load_torch_model_with_guessing(self):
         """
         Tests if a saved model is loaded corrected without given type.
         """
-        model = TestModel()
-        torch.save(model.state_dict(), self.path)
+        torch.save(self.model.state_dict(), self.path)
         test_model = load_model(self.path, model_type=None, ModelClass=TestModel)
-        self.assertIsNotNone(model, test_model)
+        self.assertIsNotNone(self.model, test_model)
+
