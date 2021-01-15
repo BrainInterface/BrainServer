@@ -2,7 +2,7 @@ import os
 
 import torch
 
-from brain_server.services.model_service import load_model
+from brain_server.services.model_service import load_model, save_model
 from tests.BaseTestCase import BaseTestCase
 
 
@@ -44,3 +44,9 @@ class ModelServiceTest(BaseTestCase):
         test_model = load_model(self.path, model_type=None, ModelClass=TestModel)
         self.assertIsNotNone(self.model, test_model)
 
+    def test_save_torch_model(self):
+        """
+        Tests if the model is saved correctly.
+        """
+        save_model(self.path, self.model, model_type='pytorch')
+        self.assertTrue(os.path.exists(self.path))
