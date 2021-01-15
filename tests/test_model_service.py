@@ -26,7 +26,7 @@ class ModelServiceTest(BaseTestCase):
         if os.path.exists(self.path):
             os.remove(self.path)
 
-    def test_load_model(self):
+    def test_load_torch_model(self):
         """
         Tests if a saved model is loaded corrected.
         """
@@ -35,7 +35,7 @@ class ModelServiceTest(BaseTestCase):
         test_model = load_model(self.path, model_type='pytorch', ModelClass=TestModel)
         self.assertIsNotNone(model, test_model)
 
-    def test_load_model_with_guessing(self):
+    def test_load_torch_model_with_guessing(self):
         """
         Tests if a saved model is loaded corrected without given type.
         """
