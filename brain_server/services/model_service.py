@@ -1,6 +1,6 @@
 import os
 import torch
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 
 def load_model(path: str, model_type: Optional[str], ModelClass: Optional[Any]) -> Any:
@@ -25,11 +25,22 @@ def load_model(path: str, model_type: Optional[str], ModelClass: Optional[Any]) 
         raise ValueError(f'model_type must be "pytorch" or "keras", but was {model_type}')
 
 
-def save_model(path: str) -> None:
+def save_model(path: str, model: Union[torch.nn.Module, Any], model_type: Optional[str]) -> None:
     """
     Saves the model.
     :param path: Path to the save location.
+    :param model: The model to save.
+    :param model_type: Optional parameter of the model type. Must 'pytorch' or 'keras'. If model
+    type is given. The method will try to guess it by file extension.
     """
+    if model_type is None:
+        model_type = _guess_model_type(path)
+    if model_type == 'pytorch':
+        torch.save(model.state_dict(), path)
+    elif model_type == 'keras':
+        raise ImportError('Currently tensorflow is not supported for python 3.9.')
+    else:
+        raise ValueError(f'model_type must be "pytorch" or "keras", but was {model_type}')
 
 
 def _guess_model_type(path):
