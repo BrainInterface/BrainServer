@@ -16,10 +16,12 @@ class ModelServiceTest(BaseTestCase):
     """
     def setUp(self) -> None:
         self.path = 'data/test_model.pt'
-        os.remove(self.path)
+        if os.path.exists(self.path):
+            os.remove(self.path)
 
     def tearDown(self) -> None:
-        os.remove(self.path)
+        if os.path.exists(self.path):
+            os.remove(self.path)
 
     def test_load_model(self):
         """
