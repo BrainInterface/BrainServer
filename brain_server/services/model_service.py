@@ -4,6 +4,7 @@ from typing import Any, Optional, Union
 import torch
 
 
+# pylint: disable=unsubscriptable-object
 def load_model(path: str, model_type: Optional[str] = None,
                ModelClass: Optional[Any] = None) -> Any:
     """
