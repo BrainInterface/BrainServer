@@ -41,7 +41,7 @@ class ModelServiceTest(BaseTestCase):
         Tests if a saved model is loaded corrected without given type.
         """
         torch.save(self.model.state_dict(), self.path)
-        test_model = load_model(self.path, model_type=None, ModelClass=TestModel)
+        test_model = load_model(self.path, ModelClass=TestModel)
         self.assertIsNotNone(self.model, test_model)
 
     def test_save_torch_model(self):
@@ -55,5 +55,5 @@ class ModelServiceTest(BaseTestCase):
         """
         Tests if the model is saved correctly.
         """
-        save_model(self.path, self.model, model_type=None)
+        save_model(self.path, self.model)
         self.assertTrue(os.path.exists(self.path))
