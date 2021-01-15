@@ -50,3 +50,10 @@ class ModelServiceTest(BaseTestCase):
         """
         save_model(self.path, self.model, model_type='pytorch')
         self.assertTrue(os.path.exists(self.path))
+
+    def test_save_torch_model_with_guessing(self):
+        """
+        Tests if the model is saved correctly.
+        """
+        save_model(self.path, self.model, model_type=None)
+        self.assertTrue(os.path.exists(self.path))
