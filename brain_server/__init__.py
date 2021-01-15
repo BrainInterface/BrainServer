@@ -1,12 +1,9 @@
 import os
 from typing import Any
 
-from celery import Celery
 from flask_api import FlaskAPI
 
-CELERY_BROKER_RULE='redis://localhost:6379/0'
-CELERY_RESULT_BACKEND='redis//localhost:6379/0'
-celery = Celery('BrainServer', broker=CELERY_BROKER_RULE, include=['brain_server.task'])
+from brain_server.celery_worker import celery
 
 
 def create_app(test_config: dict[str, Any] = None, instance_path: str = None) -> FlaskAPI:
