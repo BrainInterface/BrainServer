@@ -54,4 +54,4 @@ def _guess_model_type(path):
     elif extension == ('.h5' or '.keras'):
         return 'keras'
     else:
-        raise IOError(f'Could not guess the model type.')
+        raise IOError('Could not guess the model type.')
