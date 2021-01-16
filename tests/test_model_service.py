@@ -10,7 +10,8 @@ class TestModel(torch.nn.Module):
     """
     Empty class representing a torch module.
     """
-    pass
+    def forward(self, x):
+        return x
 
 
 class ModelServiceTest(BaseTestCase):
