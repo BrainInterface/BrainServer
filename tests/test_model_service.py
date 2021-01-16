@@ -10,6 +10,7 @@ class TestModel(torch.nn.Module):
     """
     Empty class representing a torch module.
     """
+    # pylint: disable=no-self-use
     def forward(self, x):
         return x
 
