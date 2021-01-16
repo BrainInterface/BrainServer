@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_api import status
 
-from services.action_service import ActionService
+from brain_server.services.action_service import ActionService
 
 api = Blueprint('api', __name__)
 

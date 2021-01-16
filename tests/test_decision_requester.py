@@ -26,7 +26,8 @@ class DecisionTest(BaseTestCase):
             response = self.client.get('/decision', data=[])
             self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
-    @patch('services.action_service.ActionService.request_actions', Mock(return_value=1))
+    @patch('brain_server.services.action_service.ActionService.request_actions',
+           Mock(return_value=1))
     def test_action_is_request(self):
         """
         Test request ID is returned.
@@ -37,7 +38,8 @@ class DecisionTest(BaseTestCase):
             self.assertEqual(status.HTTP_200_OK, response.status_code)
             self.assertEqual(1, response.json['request'])
 
-    @patch('services.action_service.ActionService.get_actions', Mock(return_value=['left']))
+    @patch('brain_server.services.action_service.ActionService.get_actions', Mock(return_value=[
+        'left']))
     def test_action_is_returned(self):
         """
         Test action are returned.
