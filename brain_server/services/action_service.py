@@ -21,7 +21,7 @@ class ActionService:
         return result.status()
 
     @classmethod
-    def request_actions(cls, observations: Dict[str, Any], model_id: int) -> str:
+    def request_actions(cls, observations: Dict[str, Any], model_id: str) -> str:
         """
         Creates a task to send the observation to a neural network (NN) and returns the id for the
         task.from celery import Celery
