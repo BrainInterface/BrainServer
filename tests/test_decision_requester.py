@@ -49,8 +49,8 @@ class DecisionTest(BaseTestCase):
             self.assertEqual(status.HTTP_200_OK, response.status_code)
             self.assertEqual(1, response.json['request'])
 
-    @patch('brain_server.services.action_service.ActionService.get_actions', Mock(return_value=[
-        'left']))
+    @patch('brain_server.services.action_service.ActionService.get_actions',
+           Mock(return_value=['left']))
     def test_action_is_returned(self):
         """
         Test action are returned.
