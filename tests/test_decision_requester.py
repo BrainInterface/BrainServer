@@ -23,7 +23,7 @@ class DecisionTest(BaseTestCase):
         Tests if an error is sent if there is no request id in the request.
         """
         with self.client:
-            response = self.client.get('/decision', data={'obs': {'color': 1}})
+            response = self.client.get('/decision', data={})
             self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
     def test_request_model_id_required(self):
