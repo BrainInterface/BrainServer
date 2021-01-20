@@ -34,7 +34,7 @@ def decision_request():
 def _get_obs():
     if request.form.getlist('obs'):
         return request.form.getlist('obs'), None
-    data:dict = request.data
+    data: dict = request.data
     model_id = data['model']
     del data['model']
     return data, model_id
