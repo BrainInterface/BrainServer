@@ -1,12 +1,12 @@
 import os
-from typing import Any
+from typing import Any, Dict
 
 from flask_api import FlaskAPI
 
 from brain_server.celery_worker import celery
 
 
-def create_app(test_config: dict[str, Any] = None, instance_path: str = None) -> FlaskAPI:
+def create_app(test_config: Dict[str, Any] = None, instance_path: str = None) -> FlaskAPI:
     app = FlaskAPI(__name__, instance_relative_config=True, instance_path=instance_path)
     app.config.from_mapping(
         SECRET_KEY=os.environ.get('SECRET_KEY') or 'very-secret-key'
