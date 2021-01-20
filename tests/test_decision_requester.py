@@ -15,13 +15,18 @@ class DecisionTest(BaseTestCase):
         Tests if an error is returned if no observation are sent.
         """
         with self.client:
-            response = self.client.post('/decision', data=[])
+            response = self.client.post('/decision', data={'request': 1})
             self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
     def test_request_id_required(self):
         """
         Tests if an error is sent if there is no request id in the request.
         """
+        with self.client:
+            response = self.client.get('/decision', data={'obs': {'color': 1}})
+            self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+
+    def test_request_model_id_required(self):
         with self.client:
             response = self.client.get('/decision', data=[])
             self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
@@ -33,7 +38,7 @@ class DecisionTest(BaseTestCase):
         The Unity Engine does not support sending a list in a field. Therefore it send in 'data'.
         """
         with self.client:
-            data = dict(color=1)
+            data = dict(color=1, model=1)
             response = self.client.post('/decision', data=data)
             self.assertEqual(status.HTTP_200_OK, response.status_code)
             self.assertEqual(1, response.json['request'])
@@ -45,7 +50,7 @@ class DecisionTest(BaseTestCase):
         Test request ID is returned.
         """
         with self.client:
-            data = dict(obs={'color': 1})
+            data = dict(obs={'color': 1}, model=1)
             response = self.client.post('/decision', data=data)
             self.assertEqual(status.HTTP_200_OK, response.status_code)
             self.assertEqual(1, response.json['request'])
