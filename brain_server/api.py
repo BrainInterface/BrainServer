@@ -1,6 +1,5 @@
 from flask import Blueprint, request
 from flask_api import status
-from werkzeug.datastructures import MultiDict
 
 from brain_server.services.action_service import ActionService
 
