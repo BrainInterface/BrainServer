@@ -38,7 +38,8 @@ class DecisionTest(BaseTestCase):
             self.assertEqual(status.HTTP_200_OK, response.status_code)
             self.assertEqual(1, response.json['request'])
 
-    @patch('services.action_service.ActionService.request_actions', Mock(return_value=1))
+    @patch('brain_server.services.action_service.ActionService.request_actions',
+           Mock(return_value=1))
     def test_action_is_request(self):
         """
         Test request ID is returned.
