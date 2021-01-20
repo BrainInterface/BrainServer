@@ -18,7 +18,7 @@ def decision_request():
     POST: user requests an action for a given set of observations.
     """
     if request.method == 'POST':
-        observations = request.form.getlist('obs')
+        observations = request.form.getlist('obs') if request.form.getlist('obs') else request.data
         if observations is None or len(observations) == 0:
             return {'error': 'No Observation sent.'}, status.HTTP_400_BAD_REQUEST
         request_id = ActionService.request_actions(observations)
