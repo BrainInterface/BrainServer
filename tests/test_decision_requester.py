@@ -15,7 +15,15 @@ class DecisionTest(BaseTestCase):
         Tests if an error is returned if no observation are sent.
         """
         with self.client:
-            response = self.client.post('/decision', data={'request': 1})
+            response = self.client.post('/decision', data={'model': 1})
+            self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+
+    def test_request_model_id_required(self):
+        """
+        Test if model id is required on POST.
+        """
+        with self.client:
+            response = self.client.get('/decision', data={'obs': {'color': 1}})
             self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
     def test_request_id_required(self):
@@ -24,11 +32,6 @@ class DecisionTest(BaseTestCase):
         """
         with self.client:
             response = self.client.get('/decision', data={})
-            self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
-
-    def test_request_model_id_required(self):
-        with self.client:
-            response = self.client.get('/decision', data=[])
             self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
     @patch('brain_server.services.action_service.ActionService.request_actions',
