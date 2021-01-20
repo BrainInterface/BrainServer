@@ -38,4 +38,3 @@ def _get_obs():
     model_id = data['model']
     del data['model']
     return data, model_id
-
