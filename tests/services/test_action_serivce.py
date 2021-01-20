@@ -33,5 +33,6 @@ class ActionServiceTest(BaseTestCase):
         Tests if the task is returned upon requesting an action.
         """
         obs = dict(color='blue')
-        task_id = ActionService.request_actions(obs)
+        model_id = 1
+        task_id = ActionService.request_actions(obs, model_id)
         self.assertTrue(isinstance(task_id, str))

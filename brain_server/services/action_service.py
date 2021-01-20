@@ -21,14 +21,15 @@ class ActionService:
         return result.status()
 
     @classmethod
-    def request_actions(cls, observations: Dict[str, Any]) -> str:
+    def request_actions(cls, observations: Dict[str, Any], model_id: int) -> str:
         """
         Creates a task to send the observation to a neural network (NN) and returns the id for the
         task.from celery import Celery
 
         :param observations: Dictionary containing string keys and any type of values.
         them.
+        :param model_id: The model id for which the actions are requested.
         :return: The hash id of the task which is a string.
         """
-        result = task.send_observation.delay(observations)
+        result = task.send_observation.delay(observations, model_id)
         return result.id
