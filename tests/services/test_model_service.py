@@ -80,3 +80,9 @@ class ModelServiceTest(BaseTestCase):
         Tests if a keras model is saved correctly.
         """
         save_model(self.keras_path, self.keras_model, model_type='keras')
+
+    def test_save_keras_model_with_guessing(self):
+        """
+        Tests if a keras model is saved correctly.
+        """
+        save_model(self.keras_path+'.pb', self.keras_model)
