@@ -1,6 +1,6 @@
 import os
+from unittest import skip
 
-import pytest
 import torch
 from tensorflow import keras
 
@@ -18,7 +18,7 @@ class TestTorchModel(torch.nn.Module):
         return x
 
 
-@pytest.mark.skip('Does not work in CI.')
+@skip('Does not work in CI.')
 class ModelServiceTest(BaseTestCase):
     """
     Tests the model service.
