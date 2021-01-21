@@ -24,7 +24,7 @@ class ModelServiceTest(BaseTestCase):
 
     def setUp(self) -> None:
         self.torch_path = 'data/test_torch.pt'
-        self.keras_path = 'data/test_kera'
+        self.keras_path = 'data/test_keras'
         if os.path.exists(self.torch_path):
             os.remove(self.torch_path)
         self.torch_model = TestTorchModel()
