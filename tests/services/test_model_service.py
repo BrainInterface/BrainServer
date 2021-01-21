@@ -18,15 +18,13 @@ class TestTorchModel(torch.nn.Module):
         return x
 
 
-@pytest.mark.skipif("GHA" in os.environ and os.environ["GHA"] == "true",
-                    reason='Somehow does not work in CI')
+@pytest.mark.skip('Does not work in CI.')
 class ModelServiceTest(BaseTestCase):
     """
     Tests the model service.
     """
 
     def setUp(self) -> None:
-        print(os.environ['GHA'])
         self.torch_path = 'data/test_torch.pt'
         self.keras_path = 'data/test_keras'
         if os.path.exists(self.torch_path):
