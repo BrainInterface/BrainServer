@@ -74,3 +74,9 @@ class ModelServiceTest(BaseTestCase):
         self.keras_model.save(self.keras_path)
         test_model = load_model(self.keras_path, 'keras')
         self.assertIsNotNone(test_model)
+
+    def test_save_keras_model(self):
+        """
+        Tests if a keras model is saved correctly.
+        """
+        save_model(self.keras_path, self.keras_model, model_type='keras')
