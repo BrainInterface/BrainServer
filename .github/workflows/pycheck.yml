@@ -35,7 +35,7 @@ jobs:
       - name: Python Pytest with Coverage
         run: |
           cd tests
-          python3 -m pytest --cov=../brain_server --cov-report=xml --log-cli-level=info
+          python3 -m pytest --cov=../brain_server --cov-report=xml
           cd ..
         env:
           GHA: true
