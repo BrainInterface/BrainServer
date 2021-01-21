@@ -86,3 +86,10 @@ class ModelServiceTest(BaseTestCase):
         Tests if a keras model is saved correctly.
         """
         save_model(self.keras_path+'.pb', self.keras_model)
+
+    def test_save_not_supported_extension(self):
+        """
+        Test if path has a non supported extension.
+        """
+        with self.assertRaises(IOError):
+            save_model(self.keras_path + '.non', self.keras_model)
