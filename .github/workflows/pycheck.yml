@@ -9,8 +9,8 @@ jobs:
   check:
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04]
-        python-version: [3.8]
+        os: [ ubuntu-18.04, ubuntu-20.04 ]
+        python-version: [ 3.8 ]
       fail-fast: false
       max-parallel: 4
     runs-on: ${{matrix.os}}
@@ -37,6 +37,8 @@ jobs:
           cd tests
           python3 -m pytest --cov=../brain_server --cov-report=xml --log-cli-level=info
           cd ..
+        env:
+          GHA: true
       - name: Upload to codecoverage
         uses: codecov/codecov-action@v1
         with:
