@@ -75,6 +75,13 @@ class ModelServiceTest(BaseTestCase):
         test_model = load_model(self.keras_path, 'keras')
         self.assertIsNotNone(test_model)
 
+    def test_load_wrong_model(self):
+        """
+        Tests for not supported model type.
+        """
+        with self.assertRaises(ValueError):
+            load_model(self.keras_path, model_type='.abc')
+
     def test_save_keras_model(self):
         """
         Tests if a keras model is saved correctly.
@@ -85,7 +92,7 @@ class ModelServiceTest(BaseTestCase):
         """
         Tests if a keras model is saved correctly.
         """
-        save_model(self.keras_path+'.pb', self.keras_model)
+        save_model(self.keras_path + '.pb', self.keras_model)
 
     def test_save_not_supported_extension(self):
         """
@@ -93,3 +100,10 @@ class ModelServiceTest(BaseTestCase):
         """
         with self.assertRaises(IOError):
             save_model(self.keras_path + '.non', self.keras_model)
+
+    def test_save_not_supported_model(self):
+        """
+        Test if a non supported model saving throws error.
+        """
+        with self.assertRaises(ValueError):
+            save_model(self.keras_path, model=None, model_type='.abc')
