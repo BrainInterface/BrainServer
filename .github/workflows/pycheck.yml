@@ -41,8 +41,7 @@ jobs:
           cd tests
           python3 -m pytest --cov=../brain_server --cov-report=xml
           cd ..
-        env:
-          GHA: true
+
       - name: Upload to codecoverage
         uses: codecov/codecov-action@v1
         with:
