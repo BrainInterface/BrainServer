@@ -30,8 +30,6 @@ jobs:
 
       - name: Install packages
         run: |
-          sudo apt-get update
-          sudo apt-get upgrade
           sudo install python3.8-dev
 
       - name: Install dependencies
