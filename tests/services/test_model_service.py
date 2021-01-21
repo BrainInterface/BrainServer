@@ -2,7 +2,6 @@ import os
 
 import pytest
 import torch
-from pytest import skip
 from tensorflow import keras
 
 from brain_server.services.model_service import load_model, save_model
