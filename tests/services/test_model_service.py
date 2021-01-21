@@ -27,6 +27,7 @@ class ModelServiceTest(BaseTestCase):
     """
 
     def setUp(self) -> None:
+        print(os.environ['GHA'])
         self.torch_path = 'data/test_torch.pt'
         self.keras_path = 'data/test_keras'
         if os.path.exists(self.torch_path):
