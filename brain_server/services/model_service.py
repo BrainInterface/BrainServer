@@ -50,8 +50,8 @@ def save_model(path: str,
 
 def _guess_model_type(path):
     _, extension = os.path.splitext(path)
-    if extension == '.pt' or  extension == '.pth':
+    if extension in ('.pt', '.pth'):
         return 'pytorch'
-    if extension == '.h5' or extension == '.keras' or extension == '.pb':
+    if extension in ('.h5', '.keras', '.pb'):
         return 'keras'
     raise IOError('Could not guess the model type.')
