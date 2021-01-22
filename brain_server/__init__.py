@@ -5,7 +5,7 @@ from flask_api import FlaskAPI
 from flask_migrate import Migrate
 
 from brain_server.celery_worker import celery
-from models import db
+from brain_server.models import db
 
 
 def create_app(test_config: Dict[str, Any] = None, instance_path: str = None) -> FlaskAPI:
