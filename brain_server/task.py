@@ -1,6 +1,8 @@
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
+import torch
 from celery.result import AsyncResult
+from tensorflow import keras
 
 from brain_server.celery_worker import celery
 
@@ -15,12 +17,16 @@ def get_result(task_id: str) -> AsyncResult:
 
 
 @celery.task()
-def send_observation(observations: Dict[str, Any], model_id: str) -> str:
+def send_observation(observations: Dict[str, Any],
+                     model: Union[torch.nn.Module, keras.Model]) -> str:
     """
     Sends observation to the neuronal network and returns the id for the task.
     :param observations: Dictionary containing string keys and any type of values.
     them.
-    :param model_id: The hash id of the model. It will be loaded inside the task.
+    :param model: for which the observation are intended for.
     :return: The hash id of the task which is a string.
     """
-    pass
+    if isinstance(model, keras.Model):
+        return model.call(observations)
+    else:
+        ValueError(f'Currently only keras models are supported but was {type(model)}')
