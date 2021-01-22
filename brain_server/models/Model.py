@@ -7,3 +7,4 @@ class Model(db.Model):
     """
     id = db.Column(db.Integer, index=True, primary_key=True, unique=True)
     model_type = db.Column(db.text)
+    path = db.Column(db.text, unique=True)
