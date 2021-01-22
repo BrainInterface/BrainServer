@@ -2,6 +2,7 @@ import os
 from typing import Any, Optional, Union
 
 import torch
+from tensorflow import keras
 
 
 # pylint: disable=unsubscriptable-object
@@ -23,12 +24,12 @@ def load_model(path: str, model_type: Optional[str] = None,
         model.load_state_dict(checkpoint)
         return model
     if model_type == 'keras':
-        raise ImportError('Currently tensorflow is not supported for python 3.9.')
+        return keras.models.load_model(path)
     raise ValueError(f'model_type must be "pytorch" or "keras", but was {model_type}')
 
 
 def save_model(path: str,
-               model: Union[torch.nn.Module, Any],
+               model: Union[torch.nn.Module, keras.Model],
                model_type: Optional[str] = None) -> None:
     """
     Saves the model.
@@ -42,15 +43,15 @@ def save_model(path: str,
     if model_type == 'pytorch':
         torch.save(model.state_dict(), path)
     elif model_type == 'keras':
-        raise ImportError('Currently tensorflow is not supported for python 3.9.')
+        model.save(path)
     else:
         raise ValueError(f'model_type must be "pytorch" or "keras", but was {model_type}')
 
 
 def _guess_model_type(path):
     _, extension = os.path.splitext(path)
-    if extension == ('.pt' or '.pth'):
+    if extension in ('.pt', '.pth'):
         return 'pytorch'
-    if extension == ('.h5' or '.keras'):
+    if extension in ('.h5', '.keras', '.pb'):
         return 'keras'
     raise IOError('Could not guess the model type.')
