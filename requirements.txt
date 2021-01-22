@@ -3,6 +3,7 @@ SetupTools~=51.1.1
 Celery~=5.0.5
 Flask~=1.1.2
 Flask-API~=2.0.0
+Flask-Migrate~=2.6.0
 Flask-SQLAlchemy~=2.4.4
 Flask-Testing~=0.8.1
 pylint~=2.6
