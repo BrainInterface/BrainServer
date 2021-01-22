@@ -7,7 +7,7 @@ from tensorflow import keras
 
 # pylint: disable=unsubscriptable-object
 def load_model(path: str, model_type: Optional[str] = None,
-               ModelClass: Optional[Any] = None) -> Any:
+               ModelClass: Optional[Any] = None) -> Union[torch.nn.Module, keras.Model]:
     """
     Loads a tensorflow or pytorch model.
     :param path: Path to model.
