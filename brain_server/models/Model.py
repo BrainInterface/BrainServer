@@ -1,4 +1,4 @@
-from models import db
+from brain_server.models import db
 
 
 class Model(db.Model):
