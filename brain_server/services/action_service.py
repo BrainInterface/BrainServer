@@ -1,6 +1,8 @@
 from typing import Any, List, Union, Dict
 
 from brain_server import task
+from models.Model import Model
+from services.model_service import load_model
 
 
 # pylint: disable=unsubscriptable-object
@@ -31,5 +33,7 @@ class ActionService:
         :param model_id: The model id for which the actions are requested.
         :return: The hash id of the task which is a string.
         """
-        result = task.send_observation.delay(observations, model_id)
+        model_dto: Model = Model.query.get(model_id)
+        model = load_model(model_dto.path)
+        result = task.send_observation.delay(observations, model)
         return result.id
