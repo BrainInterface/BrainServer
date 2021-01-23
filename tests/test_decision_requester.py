@@ -65,7 +65,6 @@ class DecisionTest(BaseTestCase):
         Test action are returned.
         """
         with self.client:
-            data = dict(request=1)
-            response = self.client.get('/decision', data=data)
+            response = self.client.get('/decision/1')
             self.assertEqual(status.HTTP_200_OK, response.status_code)
             self.assertEqual(['left'], response.json['action'])
