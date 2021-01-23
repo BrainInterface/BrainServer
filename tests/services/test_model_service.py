@@ -1,4 +1,5 @@
 import os
+import shutil
 from unittest import skip
 
 import torch
@@ -39,7 +40,7 @@ class ModelServiceTest(BaseTestCase):
         if os.path.exists(self.torch_path):
             os.remove(self.torch_path)
         if os.path.exists(self.keras_path):
-            os.remove(self.keras_path)
+            shutil.rmtree(self.keras_path)
 
     def test_load_torch_model(self):
         """
