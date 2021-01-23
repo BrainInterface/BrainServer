@@ -23,16 +23,16 @@ class DecisionTest(BaseTestCase):
         Test if model id is required on POST.
         """
         with self.client:
-            response = self.client.get('/decision', data={'obs': {'color': 1}})
-            self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+            response = self.client.get('/decision')
+            self.assertEqual(status.HTTP_405_METHOD_NOT_ALLOWED, response.status_code)
 
     def test_request_id_required(self):
         """
         Tests if an error is sent if there is no request id in the request.
         """
         with self.client:
-            response = self.client.get('/decision', data={})
-            self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+            response = self.client.get('/decision/')
+            self.assertEqual(status.HTTP_404_NOT_FOUND, response.status_code)
 
     @patch('brain_server.services.action_service.ActionService.request_actions',
            Mock(return_value=1))
