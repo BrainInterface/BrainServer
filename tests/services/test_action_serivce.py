@@ -18,8 +18,7 @@ class ActionServiceTest(BaseTestCase):
         self.assertEqual('2', result)
 
     @patch('brain_server.task.get_result',
-           return_value=MagicMock(status=Mock(
-               return_value='PENDING'), ready=Mock(
+           return_value=MagicMock(status='PENDING', ready=Mock(
                return_value=False)))
     def test_get_action_not_done(self, _):
         """
