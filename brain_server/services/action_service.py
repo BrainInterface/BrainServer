@@ -9,7 +9,7 @@ from brain_server.services.model_service import load_model
 class ActionService:
 
     @classmethod
-    def get_actions(cls, request_id: str) -> Union[float, List[Any]]:
+    def get_actions(cls, request_id: str) -> Union[str, float, List[Any]]:
         """
         Ask the background task for the results. It will return the actions asked for if the back-
         ground task is done, or the status of it.
@@ -20,7 +20,7 @@ class ActionService:
         result = task.get_result(request_id)
         if result.ready():
             return result.result
-        return result.status()
+        return result.status
 
     @classmethod
     def request_actions(cls, observations: Dict[str, Any], model_id: str) -> str:
