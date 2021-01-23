@@ -1,19 +1,17 @@
-from typing import Any, Dict, Union
+from typing import Any, Dict
 
-import torch
-from celery.result import AsyncResult
 from tensorflow import keras
 
 from brain_server.celery_worker import celery
 
 
-def get_result(task_id: str) -> AsyncResult:
+def get_result(task_id: str) -> celery.AsyncResult:
     """
     Returns the async result of the task.
     :param task_id: Is the id of the task for which the result is requested.
     :return: The AsyncResult object.
     """
-    return AsyncResult(id=task_id)
+    return celery.AsyncResult(id=task_id)
 
 
 @celery.task()
