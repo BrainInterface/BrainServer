@@ -30,9 +30,8 @@ def decision_request():
 def action_request(request_id):
     """
     GET: tries to the action for an request. If not done will sent progress status.
-    :param request_id:
-    :type request_id:
-    :return:
+    :param request_id: the hash id of the request.
+    :return: The actions or the status of the task.
     """
     if request_id is None:
         return {'error': 'No request ID was sent.'}, status.HTTP_400_BAD_REQUEST
