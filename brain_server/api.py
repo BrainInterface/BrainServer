@@ -35,7 +35,10 @@ def action_request(request_id):
     """
     if request_id is None:
         return {'error': 'No request ID was sent.'}, status.HTTP_400_BAD_REQUEST
-    return {'action': ActionService.get_actions(request_id)}, status.HTTP_200_OK
+    actions = ActionService.get_actions(eval(request_id)['request'])
+    if actions == 'PENDING':
+        return 'PENDING', status.HTTP_200_OK
+    return {'action': actions}, status.HTTP_200_OK
 
 
 def _get_obs():
