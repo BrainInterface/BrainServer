@@ -5,6 +5,7 @@ from unittest import skip
 import torch
 from tensorflow import keras
 
+from brain_server.models.agent import Agent
 from brain_server.services.model_service import load_model, save_model
 from tests.BaseTestCase import BaseTestCase
 
@@ -26,6 +27,7 @@ class ModelServiceTest(BaseTestCase):
     """
 
     def setUp(self) -> None:
+        Agent.query.delete()
         self.torch_path = 'data/test_torch.pt'
         self.keras_path = 'data/test_keras'
         if os.path.exists(self.torch_path):
