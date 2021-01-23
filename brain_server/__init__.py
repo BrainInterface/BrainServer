@@ -46,4 +46,13 @@ def create_app(test_config: Dict[str, Any] = None, instance_path: str = None) ->
     db.app = app
     db.create_all()
 
+    _test_model(app)
+
     return app
+
+
+def _test_model(app):
+    if not Agent.query.get(1):
+        keras_model = create_car_agent()
+        keras_model.compile()
+        save_model(app.instance_path, keras_model, 'keras')
