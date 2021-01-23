@@ -1,7 +1,7 @@
 from brain_server.models import db
 
 
-class Model(db.Model):
+class Agent(db.Model):
     """
     Represents a ML-model.
     """
