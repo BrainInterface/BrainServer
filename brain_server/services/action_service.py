@@ -17,7 +17,7 @@ class ActionService:
         :return: If the task is complete it will return the actions of that task or the status of
         it.
         """
-        result = task.get_result(request_id)
+        result = task.send_observation.AsyncResult(request_id)
         if result.ready():
             return result.result
         return result.status
