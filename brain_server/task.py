@@ -7,16 +7,7 @@ from brain_server.celery_worker import celery
 from deep_rl.car_agent import pre_process
 
 
-def get_result(task_id: str) -> celery.AsyncResult:
-    """
-    Returns the async result of the task.
-    :param task_id: Is the id of the task for which the result is requested.
-    :return: The AsyncResult object.
-    """
-    return celery.AsyncResult(id=task_id)
-
-
-@celery.task()
+@celery.task(track_started=True)
 def send_observation(observations: Dict[str, Any],
                      model_id: str) -> str:
     """
