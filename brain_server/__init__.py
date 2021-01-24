@@ -19,7 +19,9 @@ def create_app(test_config: Dict[str, Any] = None, instance_path: str = None) ->
         SECRET_KEY=os.environ.get('SECRET_KEY') or 'very-secret-key',
         DATABASE_URL_TEMPLATE=f'sqlite:///{app.instance_path}/app.db',
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        CELERY_RESULT_BACKEND='redis://localhost:6379/0'
+        CELERY_RESULT_BACKEND='redis://localhost:6379/1',
+        CELERY_TASK_TRACK_STARTED=True,
+        CELERY_IGNORE_RESULT=False
     )
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
