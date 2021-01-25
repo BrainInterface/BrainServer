@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 from tensorflow import keras
 
-from brain_server import models
+from brain_server import agents
 from brain_server.celery_worker import celery
 from deep_rl.car_agent import pre_process
 
@@ -17,10 +17,11 @@ def send_observation(observations: Dict[str, Any],
     :param model_id: the hash id of the model.
     :return: The hash id of the task which is a string.
     """
-    model = models.get(model_id)
+    model = agents.get(model_id)
     if isinstance(model, keras.Model):
         obs = list(observations.values())
         inputs = pre_process(obs[0])
-        return model(inputs).numpy()
+        actions = model(inputs).numpy()
+        return actions
     else:
         ValueError(f'Currently only keras models are supported but was {type(model)}')

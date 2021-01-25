@@ -1,6 +1,6 @@
 from typing import Any, List, Union, Dict
 
-from brain_server import task, models
+from brain_server import task, agents
 from brain_server.models.agent import Agent
 from brain_server.services.model_service import load_model
 
@@ -33,10 +33,10 @@ class ActionService:
         :param model_id: The model id for which the actions are requested.
         :return: The hash id of the task which is a string.
         """
-        if model_id not in models.keys():
+        if model_id not in agents.keys():
             model_dto = Agent.query.get(model_id)
-            _ = load_model(model_dto.path, model_type=model_dto.model_type)
-
+            model = load_model(model_dto.path, model_type=model_dto.model_type)
+            agents.update({model_id: model})
         result = task.send_observation.delay(observations, model_id)
         # result = task.send_observation(observations, model_id)
         return result.id

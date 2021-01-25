@@ -10,7 +10,7 @@ from brain_server.models.agent import Agent
 from brain_server.services.model_service import save_model
 from deep_rl.car_agent import create_car_agent
 
-models = dict()
+agents = dict()
 
 
 def create_app(test_config: Dict[str, Any] = None, instance_path: str = None) -> FlaskAPI:
