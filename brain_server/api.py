@@ -22,7 +22,7 @@ def decision_request():
             model_id: str = request.form.get('model_id')
         if observations is None or len(observations) == 0:
             return {'error': 'No Observation sent.'}, status.HTTP_400_BAD_REQUEST
-        request_id = ActionService.request_actions(observations, model_id)
+        request_id = ActionService.request_actions(dict(observations), model_id)
         return {'request': request_id}, status.HTTP_200_OK
 
 
@@ -35,7 +35,7 @@ def action_request(request_id):
     """
     if request_id is None:
         return {'error': 'No request ID was sent.'}, status.HTTP_400_BAD_REQUEST
-    actions = ActionService.get_actions(eval(request_id)['request'])
+    actions = ActionService.get_actions(request_id)
     if actions == 'PENDING':
         return 'PENDING', status.HTTP_200_OK
     return {'action': actions}, status.HTTP_200_OK
