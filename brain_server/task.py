@@ -7,7 +7,7 @@ from brain_server.celery_worker import celery, AgentTask
 from deep_rl.car_agent import pre_process
 
 
-@celery.task(base=AgentTask, track_started=True, serializer='pickle')
+@celery.task(base=AgentTask, track_started=True)
 def send_observation(observations: Dict[str, Any],
                      model_id: str):
     """
