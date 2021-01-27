@@ -1,6 +1,5 @@
 from celery import Celery, Task
 
-from brain_server.models.agent import Agent
 from brain_server.services.model_service import load_model
 
 CELERY_BROKER_RULE = 'redis://localhost:6379/0'
@@ -14,4 +13,4 @@ celery.Task.track_started = True
 class AgentTask(Task):
     def __init__(self, ):
         model = load_model('instance/', model_type='keras')
-        self._agents = {'1': model}
+        self.agents = {'1': model}
