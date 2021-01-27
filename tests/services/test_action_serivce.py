@@ -9,7 +9,7 @@ class ActionServiceTest(BaseTestCase):
     Test the action service.
     """
 
-    @patch('brain_server.task.get_result', return_value=Mock(result='2'))
+    @patch('brain_server.task.send_observation.AsyncResult', return_value=Mock(result='2'))
     def test_get_action_done(self, _):
         """
         Tests if the action returned if the task is done.
@@ -17,7 +17,7 @@ class ActionServiceTest(BaseTestCase):
         result = ActionService.get_actions('1')
         self.assertEqual('2', result)
 
-    @patch('brain_server.task.get_result',
+    @patch('brain_server.task.send_observation.AsyncResult',
            return_value=MagicMock(status='PENDING', ready=Mock(
                return_value=False)))
     def test_get_action_not_done(self, _):
