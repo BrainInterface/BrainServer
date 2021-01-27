@@ -38,5 +38,4 @@ class ActionService:
             model = load_model(model_dto.path, model_type=model_dto.model_type)
             agents.update({model_id: model})
         result = task.send_observation.delay(observations, model_id)
-        # result = task.send_observation(observations, model_id)
         return result.id
