@@ -40,8 +40,6 @@ def action_request(request_id):
 
 
 def _get_obs():
-    if request.form.getlist('obs'):
-        return request.form.getlist('obs'), None
     data: dict = request.data
     model_id = data['model']
     del data['model']
