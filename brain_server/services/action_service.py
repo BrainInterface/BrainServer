@@ -1,4 +1,4 @@
-from typing import Any, List, Union, Dict, Tuple, Optional
+from typing import Any, List, Dict, Tuple, Optional
 
 from brain_server import task, agents
 from brain_server.models.agent import Agent
