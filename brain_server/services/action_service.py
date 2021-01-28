@@ -1,8 +1,6 @@
 from typing import Any, List, Dict, Tuple, Optional
 
-from brain_server import task, agents
-from brain_server.models.agent import Agent
-from brain_server.services.model_service import load_model
+from brain_server import task
 
 
 # pylint: disable=unsubscriptable-object
@@ -33,9 +31,5 @@ class ActionService:
         :param model_id: The model id for which the actions are requested.
         :return: The hash id of the task which is a string.
         """
-        if model_id not in agents.keys():
-            model_dto = Agent.query.get(model_id)
-            model = load_model(model_dto.path, model_type=model_dto.model_type)
-            agents.update({model_id: model})
         result = task.send_observation.delay(observations, model_id)
         return result.id
