@@ -16,14 +16,13 @@ def decision_request():
     """
     POST: user requests an action for a given set of observations.
     """
-    if request.method == 'POST':
-        observations, model_id = _get_obs()
-        if model_id is None:
-            model_id: str = request.form.get('model_id')
-        if observations is None or len(observations) == 0:
-            return {'error': 'No Observation sent.'}, status.HTTP_400_BAD_REQUEST
-        request_id = ActionService.request_actions(dict(observations), model_id)
-        return {'request': request_id}, status.HTTP_200_OK
+    observations, model_id = _get_obs()
+    if model_id is None:
+        model_id: str = request.form.get('model_id')
+    if observations is None or len(observations) == 0:
+        return {'error': 'No Observation sent.'}, status.HTTP_400_BAD_REQUEST
+    request_id = ActionService.request_actions(dict(observations), model_id)
+    return {'request': request_id}, status.HTTP_200_OK
 
 
 @api.route('/decision/<request_id>', methods=['GET'])
