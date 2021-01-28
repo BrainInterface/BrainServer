@@ -30,11 +30,12 @@ class ActionServiceTest(BaseTestCase):
         self.assertEqual('STARTED', status)
         self.assertIsNone(result)
 
-    def test_request_action(self):
+    @patch('brain_server.task.send_observation.delay', return_value=MagicMock(id='abc123'))
+    def test_request_action(self, _):
         """
         Tests if the task is returned upon requesting an action.
         """
         obs = dict(color='blue')
         model_id = 1
         task_id = ActionService.request_actions(obs, model_id)
-        self.assertTrue(isinstance(task_id, str))
+        self.assertEqual('abc123', task_id)
