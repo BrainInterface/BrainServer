@@ -26,7 +26,6 @@ def send_observation(observations: Dict[str, Any],
         actions = model(inputs).numpy().flatten().tolist()
         log(10, actions)
         return actions
-    else:
-        error_message = f'Currently only keras models are supported but was {type(model)}'
-        log(level=40, msg=error_message)
-        ValueError(error_message)
+    error_message = f'Currently only keras models are supported but was {type(model)}'
+    log(level=40, msg=error_message)
+    ValueError(error_message)
