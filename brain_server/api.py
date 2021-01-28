@@ -17,8 +17,6 @@ def decision_request():
     POST: user requests an action for a given set of observations.
     """
     observations, model_id = _get_obs()
-    if model_id is None:
-        model_id: str = request.form.get('model_id')
     if observations is None or len(observations) == 0:
         return {'error': 'No Observation sent.'}, status.HTTP_400_BAD_REQUEST
     request_id = ActionService.request_actions(dict(observations), model_id)
