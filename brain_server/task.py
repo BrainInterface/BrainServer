@@ -28,4 +28,4 @@ def send_observation(observations: Dict[str, Any],
         return actions
     error_message = f'Currently only keras models are supported but was {type(model)}'
     log(level=40, msg=error_message)
-    ValueError(error_message)
+    raise ValueError(error_message)
