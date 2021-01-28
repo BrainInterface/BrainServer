@@ -59,7 +59,7 @@ class DecisionTest(BaseTestCase):
             self.assertEqual(1, response.json['request'])
 
     @patch('brain_server.services.action_service.ActionService.get_actions',
-           Mock(return_value=['left']))
+           Mock(return_value=['SUCCESS', 'left']))
     def test_action_is_returned(self):
         """
         Test action are returned.
@@ -67,4 +67,5 @@ class DecisionTest(BaseTestCase):
         with self.client:
             response = self.client.get('/decision/1')
             self.assertEqual(status.HTTP_200_OK, response.status_code)
-            self.assertEqual(['left'], response.json['action'])
+            self.assertEqual('left', response.json['action'])
+            self.assertEqual('SUCCESS', response.json['status'])
