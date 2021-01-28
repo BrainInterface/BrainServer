@@ -53,8 +53,8 @@ class DecisionTest(BaseTestCase):
         Test request ID is returned.
         """
         with self.client:
-            data = dict(obs={'color': 1}, model=1)
-            response = self.client.post('/decision', data=data)
+            data = dict(model=1, obs=dict(color=1))
+            response = self.client.post('/decision', json=data)
             self.assertEqual(status.HTTP_200_OK, response.status_code)
             self.assertEqual(1, response.json['request'])
 
