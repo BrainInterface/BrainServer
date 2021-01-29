@@ -29,6 +29,6 @@ jobs:
     - name: Python Pylint Github Action
       run: |
         python3 -m pylint --version
-        python3 -m pylint --load-plugins=pylint_flask_sqlalchemy,pylint_flask --rcfile=pylintrc
+        python3 -m pylint --load-plugins=pylint_flask_sqlalchemy,pylint_flask --rcfile=.pylintrc
         brain_server tests
          
