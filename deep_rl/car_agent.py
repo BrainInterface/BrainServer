@@ -1,17 +1,20 @@
-import numpy as np
+from typing import List
 
+import numpy as np
 from tensorflow import keras
 
 
-def pre_process(inputs: str) -> np.ndarray:
+def pre_process(inputs: List[str]) -> np.ndarray:
     """
     Preprocesses the input to for the NN input.
     :param inputs: as json string
     :return: input values as numpy array
     """
-    color = np.array(float(inputs.lstrip('<').split(',')[0]))
-    color = np.expand_dims(color, axis=0)
-    return color
+    obs_values: list = list()
+    for observation in inputs:
+        obs_value = np.array(float(observation.lstrip('<').split(',')[0]))
+        obs_values.append(np.expand_dims(obs_value, axis=0))
+    return np.array(obs_values)
 
 
 def create_car_agent() -> keras.Model:
