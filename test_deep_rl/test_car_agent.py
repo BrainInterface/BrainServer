@@ -17,6 +17,7 @@ class CarAgent(TestCase):
         inputs = ["3", "4"]
         nn_inputs = pre_process(inputs)
         np.testing.assert_array_equal(np.array(([3], [4])), nn_inputs)
+        self.assertIsNotNone(nn_inputs)
 
     def test_model_is_created(self):
         self.assertIsNotNone(create_car_agent())
