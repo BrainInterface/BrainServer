@@ -16,11 +16,11 @@ class TorchTestModel(torch.nn.Module):
     """
 
     # pylint: disable=no-self-use
-    def forward(self, x):
+    def forward(self, inputs):
         """
         Simply forwards the input.
         """
-        return x
+        return inputs
 
 
 @skip('Does not work in CI.')
