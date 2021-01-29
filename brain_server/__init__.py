@@ -14,6 +14,12 @@ agents = dict()
 
 
 def create_app(test_config: Dict[str, Any] = None, instance_path: str = None) -> FlaskAPI:
+    """
+    Creates the flask application.
+    :param test_config: this parameter is for testing only
+    :param instance_path: the path where the application runs
+    :return: a flask api application
+    """
     app = FlaskAPI(__name__, instance_relative_config=True, instance_path=instance_path)
     app.config.from_mapping(
         SECRET_KEY=os.environ.get('SECRET_KEY') or 'very-secret-key',

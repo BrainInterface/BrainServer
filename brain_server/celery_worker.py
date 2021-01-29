@@ -11,7 +11,9 @@ celery.Task.track_started = True
 
 # pylint: disable=abstract-method
 class AgentTask(Task):
-
+    """
+    A task that has NN loaded globally.
+    """
     def __init__(self):
         model = load_model('instance/', model_type='keras')
         self.agents = {'1': model}

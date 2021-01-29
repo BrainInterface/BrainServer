@@ -8,6 +8,9 @@ api = Blueprint('api', __name__)
 
 @api.route('/')
 def index():
+    """
+    Returns a simples status message.
+    """
     return {'status': 'Server up'}
 
 

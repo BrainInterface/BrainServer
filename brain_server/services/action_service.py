@@ -5,7 +5,9 @@ from brain_server import task
 
 # pylint: disable=unsubscriptable-object
 class ActionService:
-
+    """
+    Provides access to requesting actions from NN.
+    """
     @classmethod
     def get_actions(cls, request_id: str) -> Tuple[str, Optional[List]]:
         """
