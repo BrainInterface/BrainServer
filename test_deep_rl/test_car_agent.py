@@ -20,4 +20,7 @@ class CarAgent(TestCase):
         self.assertIsNotNone(nn_inputs)
 
     def test_model_is_created(self):
+        """
+        Simply test if the model is created.
+        """
         self.assertIsNotNone(create_car_agent())
