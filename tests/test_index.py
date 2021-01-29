@@ -1,4 +1,4 @@
-from tests.BaseTestCase import BaseTestCase
+from tests.base_test_case import BaseTestCase
 
 
 class IndexTest(BaseTestCase):

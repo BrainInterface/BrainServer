@@ -7,7 +7,7 @@ from tensorflow import keras
 
 from brain_server.models.agent import Agent
 from brain_server.services.model_service import load_model, save_model
-from tests.BaseTestCase import BaseTestCase
+from tests.base_test_case import BaseTestCase
 
 
 class TorchTestModel(torch.nn.Module):

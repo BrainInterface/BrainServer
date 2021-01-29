@@ -2,7 +2,7 @@ from unittest.mock import patch, Mock
 
 from flask_api import status
 
-from tests.BaseTestCase import BaseTestCase
+from tests.base_test_case import BaseTestCase
 
 
 class DecisionTest(BaseTestCase):

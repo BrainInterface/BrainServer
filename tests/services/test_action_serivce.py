@@ -1,7 +1,7 @@
 from unittest.mock import Mock, patch, MagicMock
 
 from brain_server.services.action_service import ActionService
-from tests.BaseTestCase import BaseTestCase
+from tests.base_test_case import BaseTestCase
 
 
 class ActionServiceTest(BaseTestCase):
