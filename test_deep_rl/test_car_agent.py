@@ -19,6 +19,15 @@ class CarAgent(TestCase):
         np.testing.assert_array_equal(np.array(([3], [4])), nn_inputs)
         self.assertIsNotNone(nn_inputs)
 
+    def test_multi_dimensional_input(self):
+        """
+        Tests for a multidimensional input.
+        """
+        inputs = ["3,4"]
+        nn_inputs = pre_process(inputs)
+        np.testing.assert_array_equal(np.array(([[3, 4]]), dtype=np.float64), nn_inputs)
+        self.assertIsNotNone(nn_inputs)
+
     def test_model_is_created(self):
         """
         Simply test if the model is created.
