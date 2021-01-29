@@ -21,6 +21,6 @@ def create_car_agent() -> keras.Model:
     """
     Create a model that controls the car from the demo environment
     """
-    input_layer = keras.Input(shape=(1,))
-    output_layer = keras.layers.Dense(1)(input_layer)
+    input_layer = keras.Input(shape=(2,))
+    output_layer = keras.layers.Dense(2)(input_layer)
     return keras.Model(input_layer, output_layer)
