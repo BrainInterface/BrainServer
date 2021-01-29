@@ -9,7 +9,7 @@ celery = Celery('BrainServer', broker=CELERY_BROKER_RULE, backend=CELERY_RESULT_
                 accept_content='application/x-python-serialize')
 celery.Task.track_started = True
 
-# pylint=disable:abstract-method
+# pylint: disable=abstract-method
 class AgentTask(Task):
 
     def __init__(self):
