@@ -17,6 +17,9 @@ class TorchTestModel(torch.nn.Module):
 
     # pylint: disable=no-self-use
     def forward(self, x):
+        """
+        Simply forwards the input.
+        """
         return x
 
 
