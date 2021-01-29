@@ -12,7 +12,7 @@ def pre_process(inputs: List[str]) -> np.ndarray:
     """
     obs_values: list = list()
     for observation in inputs:
-        obs_value = np.array(float(observation.lstrip('<').split(',')[0]))
+        obs_value = np.array(float(observation.split(',')[0]))
         obs_values.append(np.expand_dims(obs_value, axis=0))
     return np.array(obs_values)
 
