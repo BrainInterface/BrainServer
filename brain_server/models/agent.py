@@ -1,6 +1,7 @@
 from brain_server.models import db
 
 
+# pylint: disable=too-few-public-methods
 class Agent(db.Model):
     """
     Represents a ML-model.
