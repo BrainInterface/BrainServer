@@ -18,7 +18,6 @@ class TorchTestModel(torch.nn.Module):
         return x
 
 
-@skip('Does not work in CI.')
 class ModelServiceTest(BaseTestCase):
     """
     Tests the model service.
