@@ -21,7 +21,7 @@ def send_observation(observations: Dict[str, Any],
     model = send_observation.agents.get(model_id)
     if isinstance(model, keras.Model):
         obs = list(observations.values())
-        inputs = pre_process(obs[0])
+        inputs = pre_process(obs)
         log(10, inputs)
         actions = model(inputs).numpy().flatten().tolist()
         log(10, actions)
