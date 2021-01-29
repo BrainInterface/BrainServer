@@ -9,6 +9,7 @@ from brain_server.models import db
 from brain_server.models.agent import Agent
 
 
+# pylint: disable=invalid-name
 def load_model(path: str, model_type: Optional[str] = None,
                ModelClass: Optional[Any] = None) -> Union[torch.nn.Module, keras.Model]:
     """
