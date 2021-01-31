@@ -1,26 +1,31 @@
+from logging import log
 from typing import Any, Dict
 
-from celery.result import AsyncResult
+from tensorflow import keras
 
-from brain_server.celery_worker import celery
-
-
-def get_result(task_id: str) -> AsyncResult:
-    """
-    Returns the async result of the task.
-    :param task_id: Is the id of the task for which the result is requested.
-    :return: The AsyncResult object.
-    """
-    return AsyncResult(id=task_id)
+from brain_server.celery_worker import celery, AgentTask
+from deep_rl.car_agent import pre_process
 
 
-@celery.task()
-def send_observation(observations: Dict[str, Any], model_id: str) -> str:
+@celery.task(base=AgentTask, track_started=True)
+def send_observation(observations: Dict[str, Any],
+                     model_id: str):
     """
     Sends observation to the neuronal network and returns the id for the task.
     :param observations: Dictionary containing string keys and any type of values.
     them.
-    :param model_id: The hash id of the model. It will be loaded inside the task.
+    :param model_id: the hash id of the model.
     :return: The hash id of the task which is a string.
     """
-    pass
+    log(level=10, msg=send_observation.agents)
+    model = send_observation.agents.get(model_id)
+    if isinstance(model, keras.Model):
+        obs = list(observations.values())
+        inputs = pre_process(obs)
+        log(10, inputs)
+        actions = model(inputs).numpy().flatten().tolist()
+        log(10, actions)
+        return actions
+    error_message = f'Currently only keras models are supported but was {type(model)}'
+    log(level=40, msg=error_message)
+    raise ValueError(error_message)

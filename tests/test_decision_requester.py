@@ -2,7 +2,7 @@ from unittest.mock import patch, Mock
 
 from flask_api import status
 
-from tests.BaseTestCase import BaseTestCase
+from tests.base_test_case import BaseTestCase
 
 
 class DecisionTest(BaseTestCase):
@@ -23,16 +23,16 @@ class DecisionTest(BaseTestCase):
         Test if model id is required on POST.
         """
         with self.client:
-            response = self.client.get('/decision', data={'obs': {'color': 1}})
-            self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+            response = self.client.get('/decision')
+            self.assertEqual(status.HTTP_405_METHOD_NOT_ALLOWED, response.status_code)
 
     def test_request_id_required(self):
         """
         Tests if an error is sent if there is no request id in the request.
         """
         with self.client:
-            response = self.client.get('/decision', data={})
-            self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+            response = self.client.get('/decision/')
+            self.assertEqual(status.HTTP_404_NOT_FOUND, response.status_code)
 
     @patch('brain_server.services.action_service.ActionService.request_actions',
            Mock(return_value=1))
@@ -53,19 +53,19 @@ class DecisionTest(BaseTestCase):
         Test request ID is returned.
         """
         with self.client:
-            data = dict(obs={'color': 1}, model=1)
-            response = self.client.post('/decision', data=data)
+            data = dict(model=1, obs=dict(color=1))
+            response = self.client.post('/decision', json=data)
             self.assertEqual(status.HTTP_200_OK, response.status_code)
             self.assertEqual(1, response.json['request'])
 
     @patch('brain_server.services.action_service.ActionService.get_actions',
-           Mock(return_value=['left']))
+           Mock(return_value=['SUCCESS', 'left']))
     def test_action_is_returned(self):
         """
         Test action are returned.
         """
         with self.client:
-            data = dict(request=1)
-            response = self.client.get('/decision', data=data)
+            response = self.client.get('/decision/1')
             self.assertEqual(status.HTTP_200_OK, response.status_code)
-            self.assertEqual(['left'], response.json['action'])
+            self.assertEqual('left', response.json['action'])
+            self.assertEqual('SUCCESS', response.json['status'])

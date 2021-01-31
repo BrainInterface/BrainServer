@@ -4,10 +4,14 @@ from typing import Any, Optional, Union
 import torch
 from tensorflow import keras
 
-
 # pylint: disable=unsubscriptable-object
+from brain_server.models import db
+from brain_server.models.agent import Agent
+
+
+# pylint: disable=invalid-name
 def load_model(path: str, model_type: Optional[str] = None,
-               ModelClass: Optional[Any] = None) -> Any:
+               ModelClass: Optional[Any] = None) -> Union[torch.nn.Module, keras.Model]:
     """
     Loads a tensorflow or pytorch model.
     :param path: Path to model.
@@ -46,6 +50,9 @@ def save_model(path: str,
         model.save(path)
     else:
         raise ValueError(f'model_type must be "pytorch" or "keras", but was {model_type}')
+    model_dto = Agent(model_type=model_type, path=path)
+    db.session.add(model_dto)
+    db.session.commit()
 
 
 def _guess_model_type(path):
@@ -54,4 +61,4 @@ def _guess_model_type(path):
         return 'pytorch'
     if extension in ('.h5', '.keras', '.pb'):
         return 'keras'
-    raise IOError('Could not guess the model type.')
+    raise IOError(f'Could not guess the model type from path: {path}')

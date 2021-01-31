@@ -1,11 +1,13 @@
 import os
+import shutil
 from unittest import skip
 
 import torch
 from tensorflow import keras
 
+from brain_server.models.agent import Agent
 from brain_server.services.model_service import load_model, save_model
-from tests.BaseTestCase import BaseTestCase
+from tests.base_test_case import BaseTestCase
 
 
 class TorchTestModel(torch.nn.Module):
@@ -14,8 +16,11 @@ class TorchTestModel(torch.nn.Module):
     """
 
     # pylint: disable=no-self-use
-    def forward(self, x):
-        return x
+    def forward(self, inputs):
+        """
+        Simply forwards the input.
+        """
+        return inputs
 
 
 @skip('Does not work in CI.')
@@ -25,6 +30,7 @@ class ModelServiceTest(BaseTestCase):
     """
 
     def setUp(self) -> None:
+        Agent.query.delete()
         self.torch_path = 'data/test_torch.pt'
         self.keras_path = 'data/test_keras'
         if os.path.exists(self.torch_path):
@@ -39,7 +45,7 @@ class ModelServiceTest(BaseTestCase):
         if os.path.exists(self.torch_path):
             os.remove(self.torch_path)
         if os.path.exists(self.keras_path):
-            os.remove(self.keras_path)
+            shutil.rmtree(self.keras_path)
 
     def test_load_torch_model(self):
         """

@@ -1,13 +1,15 @@
-from typing import Any, List, Union, Dict
+from typing import Any, List, Dict, Tuple, Optional
 
 from brain_server import task
 
 
 # pylint: disable=unsubscriptable-object
 class ActionService:
-
+    """
+    Provides access to requesting actions from NN.
+    """
     @classmethod
-    def get_actions(cls, request_id: str) -> Union[float, List[Any]]:
+    def get_actions(cls, request_id: str) -> Tuple[str, Optional[List]]:
         """
         Ask the background task for the results. It will return the actions asked for if the back-
         ground task is done, or the status of it.
@@ -15,10 +17,10 @@ class ActionService:
         :return: If the task is complete it will return the actions of that task or the status of
         it.
         """
-        result = task.get_result(request_id)
+        result = task.send_observation.AsyncResult(request_id)
         if result.ready():
-            return result.result
-        return result.status()
+            return result.status, result.result
+        return result.status, None
 
     @classmethod
     def request_actions(cls, observations: Dict[str, Any], model_id: str) -> str:
