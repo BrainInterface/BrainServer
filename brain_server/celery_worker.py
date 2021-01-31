@@ -2,6 +2,7 @@ import os
 
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
 
+# pylint: disable=wrong-import-position
 from celery import Celery, Task
 
 from brain_server.services.model_service import load_model
